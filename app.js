@@ -6,6 +6,22 @@ sayHello();
 
 console.log(module);
 
- l= require("./logger.js");
+ const lgr= require("./logger.js");
+lgr("module test");
 
-l("module test");
+const pth=require("path");
+console.log(pth);
+
+const fs= require("fs");
+files= fs.readdirSync(".")
+
+function readdirCallBack(error,file)
+{
+    if(error)
+    console.log(`Error: ${err}`);
+    else 
+    console.log(`success: ${files}`);
+}
+
+fs.readdir(".",readdirCallBack)
+console.log(files);
