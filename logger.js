@@ -1,6 +1,19 @@
-url="";
+url = "";
+const EventEmitter = require("events");
+// const emitter = new EventEmitter();
 
-function log(message){
-    console.log(message);
+class Logger extends EventEmitter
+{
+    
+    constructor()
+    {
+        super();
+        
+    }
+    log(message){
+
+        console.log(message);
+        this.emit("LogBitti",{evenName:"log işi tamamdır", eventId:"1"});
+    }
 }
-module.exports=log;
+module.exports = Logger;

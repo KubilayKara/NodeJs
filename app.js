@@ -26,10 +26,10 @@
 // fs.readdir(".",readdirCallBack)
 // console.log(files);
 
-const EventEmitter=require("events");
-const emitter= new EventEmitter();
-emitter.on("LogGeldi",(args)=>{
-    console.log(`Vallaha da geldi. name:${args.evenName} id:${args.eventId}`);
-});
+const Logger=require("./logger.js");
+const l= new Logger();
 
-emitter.emit("LogGeldi",{evenName:"balam", eventId:"1"});
+l.on("LogBitti", (args) => {
+    console.log(`Harbiden da bitti. name:${args.evenName} id:${args.eventId}`);
+});
+l.log("bir mesaj sana");
