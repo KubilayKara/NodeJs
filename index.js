@@ -7,6 +7,10 @@ app.get('/',(req, resp)=>{
  resp.send("Hello World From Express")
 });
 
+app.get('/api/courses',(req, resp)=>{
+    resp.send([{ name: "Web", id: "1001" }, { name: "Rest", id: "1002" }, { name: "Angular", id: "1003" }, { name: "Micro Services", id: "1004" }])
+   });
+
 app.listen(3000, ()=>{
     console.log ("listening port 3000");
 })
