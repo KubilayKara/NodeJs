@@ -21,19 +21,15 @@ app.get('/api/courses', (req, resp) => {
 app.put('/api/courses/:id', (req, resp) => {
     //look up the course
     const course = courses.find(c => c.id === parseInt(req.params.id));
-    if (!course) {
-        resp.status(404).send("Böyle bir kurs yok gülüm");
-        return;
-    }
+    if (!course) 
+     return    resp.status(404).send("Böyle bir kurs yok gülüm");
 
     //Validate
 
     // const result = validateCourse(req.body);
     const { error } = validateCourse(req.body);
-    if (error) {
-        resp.status(400).send(error.details[0].message);
-        return;
-    }
+    if (error) 
+        return resp.status(400).send(error.details[0].message);
 
     //Update
     course.name = req.body.name;
@@ -53,15 +49,14 @@ app.post('/api/courses', (req, resp) => {
     const result = validateCourse(req.body);
 
     if (result.error)
-        resp.status(400).send(result.error.details[0].message);
-    else {
-        const course = {
-            id: courses.length + 1,
-            name: req.body.name
-        };
-        courses.push(course);
-        resp.send(course);
-    }
+        return resp.status(400).send(result.error.details[0].message);
+
+    const course = {
+        id: courses.length + 1,
+        name: req.body.name
+    };
+    courses.push(course);
+    resp.send(course);
 });
 
 app.delete("/api/courses/:id", (req, resp) => {
