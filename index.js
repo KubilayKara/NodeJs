@@ -2,6 +2,7 @@
 const { response } = require('express');
 const express = require ('express');
 const app= express();
+app.use(express.json());
 require("dotenv").config();
 
 const courses=[{ name: "Web", id: 1001 }, { name: "Rest", id: 1002 }, { name: "Angular", id: 1003 }, 
@@ -14,9 +15,23 @@ app.get('/',(req, resp)=>{
 
 app.get('/api/courses',(req, resp)=>{
     resp.send(courses);
+   });  
+
+app.put('/api/courses',(req, resp)=>{
+    resp.send(courses);
+   });  
+app.post('/api/courses', (req, resp) => { 
+    // console.log("post course body")
+    // console.log(req.body);
+    const course={
+        id: courses.length+1,
+        name: req.body.name
+    };
+    courses.push(course);
+    resp.send(course);
    });
 
-app.get('/api/courses/:id/:name', (req, resp) => {
+app.get('/api/course/:id', (req, resp) => {
     console.log(`id:${req.params.id}`);
     // console.log(`name:${req.params.name}`);
     console.log(req.query);
