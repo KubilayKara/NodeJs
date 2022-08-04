@@ -1,4 +1,5 @@
 //https://www.npmjs.com/package/express
+const { response } = require('express');
 const express = require ('express');
 const app= express();
 require("dotenv").config();
@@ -17,15 +18,19 @@ app.get('/api/courses',(req, resp)=>{
 
 app.get('/api/courses/:id/:name', (req, resp) => {
     console.log(`id:${req.params.id}`);
-    console.log(`name:${req.params.name}`);
+    // console.log(`name:${req.params.name}`);
     console.log(req.query);
     // const res= courses.filter((c)=> {return c.id===req.params.id;});
     // console.log(`result:${res.toString()}`);
     // resp.send(res[0]);
 
     const course = courses.find(c => c.id === parseInt(req.params.id));
-    console.log(` course: ${course.name}`);
-    resp.send(course);
+    if(!course)
+        resp.status(404).send("Böyle bir kurs yok gülüm");
+    else{
+        resp.send(course);
+        console.log(` course: ${course.name}`);
+    }
    });
 
 
